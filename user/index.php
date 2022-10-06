@@ -28,47 +28,7 @@ include 'database.php';
         <div class="row">
             <h1><strong>Liste des items </strong><a href="insert.php" class="btn btn-success btn-lg"><span
                         class="glyphicon glyphicon-plus"></span>Ajouter</a></h1>
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Description</th>
-                        <th>Prix</th>
-                        <th>Catégorie</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                
-
-                    <?php
-                    $statement = $bdd->query('SELECT * FROM items INNER JOIN categories WHERE items.category = categories.id');
-            
-                    while($donnees = $statement->fetch())
-                    {
-
-                    ?>
-                    <?php
-                        echo'<tr>';
-                        echo'<td>' . $donnees['name'] . '</td>';
-                        echo'<td>' . $donnees['prenom'] . '</td>';
-                        echo'<td>' . $donnees['email'] . '</td>';
-                        echo'<td>' . $donnees['password'] . '</td>';
-                       
-                        echo'<td width=300>';
-                        echo'<a class="btn btn-default" href="view.php?id='. $donnees['id'] . '"><span class="glyphicon-eye-open"></span>Voir</a>';
-                        echo'<a class="btn btn-primary" href="update.php?id='. $donnees['id'] . '"><span class="glyphicon-pencil"></span>Modifier</a>';
-                        echo'<a class="btn btn-danger" href="delete.php?id=' . $donnees['id'] . '"><span class="glyphicon-remove"></span>Supprimer</a>';
-                            
-
-                        echo'</td>';
-                        echo'</tr>';
-                    ?>
-
-                    <?php  } $statement -> closeCursor(); ?>
-                    
-                </tbody>
-            </table>
+            <table class="table table-striped table-bordered"></table>
 
         </div>
 

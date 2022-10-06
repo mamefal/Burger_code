@@ -6,9 +6,9 @@
    if(!empty($_POST))
    {
         $name             = checkInput($_POST['name']);
-        $prenom      = checkInput($_POST['description']);
-        $email            = checkInput($_POST['price']);
-        $password         = checkInput($_POST['category']);
+        $prenom      = checkInput($_POST['prenom']);
+        $email            = checkInput($_POST['email']);
+        $password         = checkInput($_POST['password']);
         $isSuccess        =true;
         $isUploadSuccess  =false;
    }
@@ -37,13 +37,36 @@
         if($isSuccess && $isUploadSuccess)
         {
           
-          $statement = $db->prepare("INSERT INTO items (name,prenom,email,password,) values (?,?,?,?)");
-          $statement->execute(array($name,$prenom,$email,$password));
+          $statement = $bdd->prepare('SELECT name, prenom, email, password FROM USER WHERE email = ?');
+          $statement->execute(array($email));
+
+          $data = $check->fetch();
+          $row = $check->rowCount();
+
+          if($row == 1)
+          {
+            if(filter_var($email, FILTER_VALIDATE_EMAIL))
+            {
+                $password = hash('sha256' , $password);
+
+                if($data['password'] === $password)
+                {
+                    $_SESSION['user'] = $data['name'];
+
+        
+
+                
+            
+          
           
           header("Location: index.php");
-        }
+        }else header('Location:index.php?login_err-password');
 
-    
+    }else header('Location:index.php?login_err-email');
+
+}else header('Location:index.php?login_err-already');
+
+}
 
     function checkInput($data)
     {
@@ -52,6 +75,7 @@
         $data = htmlspecialchars($data);
         return $data;
     }
+    
 
     
 
@@ -110,7 +134,7 @@
             <div class="col-sm-6">
             <h1><strong>Connexion</strong></h1>
             <br>
-            <form class="form" role="form" action="insert.php" method="post" enctype="multipart/form-data">
+            <form class="form" role="form" action="connexion.php" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="name">Nom:</label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="Nom" value="<?php echo $name; ?>"> 
@@ -129,7 +153,7 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password :</label>
-                    <select class="form-control" id="password" name="password">
+                    <input class="form-control" id="password" name="password">
                         <?php
                            
                            $data = $bdd->query('SELECT * FROM user ');
@@ -140,12 +164,12 @@
                            }
                             
                         ?>
-                    </select>
+                    
                 </div>
                 <br>
             <div class="form-actions">
                 <button type="submit" class="btn btn-success"><span class="glyphicon glyphicon-pencil"></span> Connexion </button>
-                <a class="btn btn-primary" href="index.php"><span class="glyphicon glyphicon-arrow-left">Retour</a>
+                <a class="btn btn-primary" href="index.php"><span class="glyphicon glyphicon-arrow-left">Inscription</a>
             </div>
             </form>
         </div>
