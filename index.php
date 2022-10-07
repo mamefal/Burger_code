@@ -22,12 +22,13 @@
                     $statement = $bdd->query('SELECT * FROM categories');
             
                     $categories = $statement->fetchAll();
+                
                     foreach($categories as $category)
                     {
                         if($category['id'] == '1')
-                             echo'<li role="presentation" class="active"><a href="#' . $category['id'] . '" data-toggle="tab">' .$category['name']. '</a></li>';
+                             echo'<li role="presentation" class="active"><a href="'.  '" data-toggle="tab">' .$category['name']. '</a></li>';
                         else
-                             echo '<li role="presentation"><a href="#' . $category['id'] . '" data-toggle="tab">' .$category['name']. '</a></li>';
+                             echo '<li role="presentation"><a href="'.$category['name'].'.php' .  '" data-toggle="tab">' .$category['name']. '</a></li>';
                     }
                     echo     '</ul>
                         </nav>';
@@ -66,7 +67,7 @@
                     }
                     echo '</div>';
             ?>
-        
+
            </div>
         <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.min.js" integrity="sha384-kjU+l4N0Yf4ZOJErLsIcvOU2qSb74wXpOhqTvwVx3OElZRweTnQ6d31fXEoRD1Jy" crossorigin="anonymous"></script>

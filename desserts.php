@@ -18,16 +18,16 @@
 
            <?php
 
-include 'admin/database.php';
-echo '<nav>
-        <ul class="nav nav-pills">';
-        $statement = $bdd->query('SELECT * FROM categories');
-
-        $categories = $statement->fetchAll();
+                include 'admin/database.php';
+        echo '<nav>
+             <ul class="nav nav-pills">';
+          $statement = $bdd->query('SELECT * FROM categories');
+        
+          $categories = $statement->fetchAll();
         foreach($categories as $category)
         {
-            if($category['id'] == '1')
-                 echo'<li role="presentation" class="active"><a href="#' . $category['id'] . '" data-toggle="tab">' .$category['name']. '</a></li>';
+            if($category['id'] == '6')
+                 echo'<li role="presentation" ><a href="#' . $category['id'] . '" data-toggle="tab">' .$category['name']. '</a></li>';
             else
                  echo '<li role="presentation"><a href="#' . $category['id'] . '" data-toggle="tab">' .$category['name']. '</a></li>';
         }
@@ -38,7 +38,7 @@ echo '<nav>
 
         foreach($categories as $category)
         {
-            if($category['id'] == '1')
+            if($category['id'] == '6')
                 echo '<div class="tab-pane active" id="' .$category['id'] .'">';
             else
                 echo '<div class="tab-pane " id="' .$category['id'] .'">';
@@ -57,7 +57,7 @@ echo '<nav>
                                   <h4>' . $item['name'] . '</h4>
                                   <p>' . $item['description'] . '</p>
                                   <a href="#" class="btn btn-order" role="button"><span 
-                                    class="glyphicon glyphicon-shopping-cart"></span>Commander</a>
+                                  class="glyphicon glyphicon-shopping-cart"></span>Commander</a>
                             </div>
                         </div>
                     </div>';
@@ -75,84 +75,9 @@ echo '<nav>
 
          
         
-    <div class="tab-content">
-        <div class="tab-pane " id="6">
-            <div class="row">
-                <div class="col-sm-6 col-md-4">
-                    <div class="thumbnail">
-                        <img src="./image/p7/dess1.jpg" alt="...">
-                        <div> 8.99 €</div>
-                        <div class="caption">
-                            <h4>Sundae Mangue</h4>
-                            <p>Des mélanges uniques , comme vous</p>
-                            <a href="#" class="btn btn-order" role="button"><span 
-                                class="glyphicon glyphicon-shopping-cart"></span>Commander</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="image/p7/dess2.jpg" alt="">
-                    <div> 11.99 €</div>
-                    <div class="caption">
-                        <h4>Sundae Passion</h4>
-                        <p>Des mélanges uniques , comme vous</p>
-                        <a href="#" class="btn btn-order" role="button"><span 
-                            class="glyphicon glyphicon-shopping-cart"></span>Commander</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="image/p7/dess2.jpg" alt="">
-                    <div> 13.99 €</div>
-                    <div class="caption">
-                        <h4>Sundae Vanille</h4>
-                        <p>Des mélanges uniques , comme vous</p>
-                        <a href="#" class="btn btn-order" role="button"><span 
-                            class="glyphicon glyphicon-shopping-cart"></span>Commander</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="image/p7/dess2.jpg" alt="">
-                    <div> 12.99 €</div>
-                    <div class="caption">
-                        <h4>Sundae Chocolat</h4>
-                        <p>Des mélanges uniques , comme vous</p>
-                        <a href="#" class="btn btn-order" role="button"><span 
-                            class="glyphicon glyphicon-shopping-cart"></span>Commander</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="./image/p7/dess2.jpg" alt="">
-                    <div> 9.99 €</div>
-                    <div class="caption">
-                        <h4>sundae fraise</h4>
-                        <p>Des mélanges uniques , comme vous</p>
-                        <a href="#" class="btn btn-order" role="button"><span 
-                            class="glyphicon glyphicon-shopping-cart"></span>Commander</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4">
-                <div class="thumbnail">
-                    <img src="image/p7/dess6.jpg" alt="">
-                    <div> 10.99 €</div>
-                    <div class="caption">
-                        <h4>Sundae Nature</h4>
-                        <p>Des mélanges uniques , comme vous</p>
-                        <a href="#" class="btn btn-order" role="button"><span 
-                            class="glyphicon glyphicon-shopping-cart"></span>Commander</a>
-                    </div>
-                </div>
-            </div>
+    
+     </div>
+     </div>
                
             
             <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous"></script>

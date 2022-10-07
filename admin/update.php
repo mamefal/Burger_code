@@ -16,15 +16,15 @@
         $price            = checkInput($_POST['price']);
         $category         = checkInput($_POST['category']);
         $image            = checkInput($_FILES['image']['name']);
-        $imagePath        = './images/p7/' . basename($image);
-        $imageExtension   = pathinfo($imagePath, PATHINFO_EXTENSION);
+        $imagePath        = '../image/p7/' . basename($image);
+        $imageExtension   = pathinfo($imagePath, 'PATHINFO_EXTENSION');
         $isSuccess        =true;
 
         if(empty($name))
-        {
-            $nameError = 'Ce champ ne peut pas etre vide';
-            $isSuccess = false;
-        }
+            {
+                $nameError = 'Ce champ ne peut pas etre vide';
+                $isSuccess = false;
+            }
         if(empty($description))
             {
                 $descriptionError = 'Ce champ ne peut pas etre vide';
@@ -50,73 +50,73 @@
         $isImageUpdated = true;
         $isUploadSuccess = true;
         if($imageExtension = "jpg" && $imageExtension = "jpeg" && $imageExtension = "gif" )
-        {
+         {
             $imageError = "Les fichiers autorises sont : .jpg, .jpeg, .png, .gif";
             $isUploadSuccess = false;
-        }
+         }
         if(file_exists($imagepath))
-        {
+         {
             $imageError = "le fichier existe deja";
             $isUploadSuccess = false;
-        }
+         }
         if($_FILES["image"]["size"]> 500000)
-        {
+         {
             $imageError = "le fichier ne doit pas depasser les 500KB";
             $isUploadSuccess = false;
-        }
+         }
         if($isUploadSuccess)
-        {
+         {
             if(!move_uploaded_file($_FILES["image"]["tmp_name"], $imagePath))
             {
                 $imageError = "il y a eu une erreur lors de l'upload";
                 $isUploadSuccess = false;
             }
-        }
+         }
     
-        if($isSuccess && $isImageUpdated && $isUploadSuccess || ($isSuccess && !$isImageUpdated)) 
-        {
+         if(($isSuccess && $isImageUpdated && $isUploadSuccess )|| ($isSuccess && !$isImageUpdated)) 
+         {
           
-
-          if($imageUpdated)
+           
+          if($isImageUpdated)
           {
-          $statement = $bdd->prepare("UPDATE items set name = ?, description = ?, price = ?,category = ?, image = ?, WHERE id= ?");
-          $statement->execute(array($name,$description,$price,$category,$image,$id));
+                $statement = $bdd->prepare("UPDATE items set name = ?, description = ?, price = ?,category = ?, image = ?, WHERE id= ?");
+                $statement->execute(array($name,$description,$price,$category,$image,$id));
           }
           else
-           {
+          {
             $statement = $bdd->prepare("UPDATE items set name = ?, description = ?, price = ?,category = ?, image = ?, WHERE id= ?");
             $statement->execute(array($name,$description,$price,$category,$id));
-            }
+          }
 
            
            header("Location: index.php");
-        }
-        else if($isImageUpdated && !$isUploadSuccess)
-        {
+         }
+         else if($isImageUpdated && !$isUploadSuccess)
+         {
             
             $statement= $bdd->prepare("SELECT image FROM items WHERE id = ?");
             $statement->execute(array($id));
-            $donnees  = $statement->fetch();
-            $image = $donnees['image'];
+            $item  = $statement->fetch();
+            $image = $item['image'];
+         }
             
-        }
+         
 
-    
-
-    
-        else
-       {
+         else
+         {
             
-            $statement= $bdd->prepare("SELECT * FROM items WHERE id = ?");
+            $statement= $db->prepare("SELECT * FROM items WHERE id = ?");
             $statement->execute(array($id));
-            $donnees = $statement->fetch();
-            $name           =$donnees['name'];
-            $description    =$donnees['description'];
-            $price          =$donnees['price'];
-            $category       =$donnees['category'];
-            $image          =$donnees['image'];
+            $item = $statement->fetch();
+            $name           =$item['name'];
+            $description    =$item['description'];
+            $price          =$item['price'];
+            $category       =$item['category'];
+            $image          =$item['image'];
+             
+         }  
             
-       }
+         
     }
    
 
@@ -148,7 +148,7 @@
 </head>
 
 <body>
-
+     <div class="container site">
         <h1 class="text_logo"><span class="glyphicon glyphicon-cutlery"></span>
             Burger Code <span class="glyphicon glyphicon-cutlery"></span></h1>
         <div class="container admin">
@@ -177,7 +177,7 @@
                         <label for="category">Catégorie :</label>
                         <select class="form-control" id="category" name="category">
                             <?php
-                            
+                              
                             
                             foreach($bdd->query('SELECT * FROM categories ')  as $row )
 
@@ -189,7 +189,7 @@
                                  
 
                             }
-                                
+                              
                             ?>
                         </select>
                     </div>
@@ -209,17 +209,18 @@
             </div>
             <div class="col-sm-6 site">
              <div class="thumbnail">
-                                <img src="<?php echo '../images/' . $image ; ?> " alt="..">
+                                <img src="<?php echo './image/p7/m4.pnj' . $image ; ?> " alt="..">
                                 <div class="price"><?php echo number_format((float)$price,2, '.', '') . '€'; ?></div>
                                 <div class="caption">
                                     <h4><?php echo $name; ?></h4>
                                     <p><?php echo $description; ?></p>
                                     <a href="#" class="btn btn-order" role="button"><span 
                                     class="glyphicon glyphicon-shopping-cart"></span>Commander</a>
-                                </div>
-                            </div>
-                        </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        </div>
+    </div>
 </body>
 </html>
